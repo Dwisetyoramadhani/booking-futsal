@@ -4,10 +4,10 @@
 @section('header', 'Pesanan')
 
 @section('content')
-<div class="bg-white p-6 rounded-lg shadow-md">
+    <div class="bg-white p-6 rounded-lg shadow-md">
         <h1 class="text-2xl font-bold mb-4 text-gray-800">Daftar Pesanan Booking</h1>
 
-        @if(session('success'))
+        @if (session('success'))
             <div class="bg-green-50 border border-green-200 text-green-800 p-3 rounded-lg mb-4">
                 <div class="flex items-center">
                     <i class="fas fa-check-circle mr-2 text-green-600"></i>
@@ -17,10 +17,7 @@
         @endif
 
         <!-- Compact Table -->
-        <x-compact-table
-            :headers="['#', 'Pemesan', 'Lapangan', 'Jam', 'Jadwal', 'Bukti', 'Status', 'Aksi']"
-            searchable="true"
-            searchPlaceholder="Cari pesanan...">
+        <x-compact-table :headers="['#', 'Pemesan', 'Lapangan', 'Jam', 'Jadwal', 'Bukti', 'Status', 'Aksi']" searchable="true" searchPlaceholder="Cari pesanan...">
 
             @forelse($pesanan as $index => $order)
                 <x-compact-table-row>
@@ -28,15 +25,14 @@
                         <span class="table-row-number">{{ $index + 1 }}</span>
                     </x-compact-table-cell>
                     <x-compact-table-cell>
-                        <x-compact-table-avatar
-                            :name="$order->nama_lengkap"
-                            color="blue">
+                        <x-compact-table-avatar :name="$order->nama_lengkap" color="blue">
                             <div class="text-xs text-gray-500">#{{ $order->id }}</div>
                         </x-compact-table-avatar>
                     </x-compact-table-cell>
                     <x-compact-table-cell>
                         <div class="font-medium text-gray-800 text-xs">{{ $order->lapangan->nama_lapangan }}</div>
-                        <div class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($order->tanggal)->format('d M Y') }}</div>
+                        <div class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($order->tanggal)->format('d M Y') }}
+                        </div>
                     </x-compact-table-cell>
                     <x-compact-table-cell>
                         <div class="font-medium text-gray-800 text-xs">{{ $order->jumlah_jam }} jam</div>
@@ -46,11 +42,8 @@
                         <div class="text-xs text-gray-700">{{ implode(', ', explode(',', $order->jam)) }}</div>
                     </x-compact-table-cell>
                     <x-compact-table-cell>
-                        <x-safe-image
-                            :src="$order->bukti_pembayaran"
-                            alt="Bukti Pembayaran"
-                            class="w-6 h-6 object-cover rounded shadow-sm"
-                            fallbackIcon="fas fa-receipt"
+                        <x-safe-image :src="$order->bukti_pembayaran" alt="Bukti Pembayaran"
+                            class="w-6 h-6 object-cover rounded shadow-sm" fallbackIcon="fas fa-receipt"
                             :showLink="true" />
                     </x-compact-table-cell>
                     <x-compact-table-cell>
@@ -60,19 +53,19 @@
                     </x-compact-table-cell>
                     <x-compact-table-cell>
                         <x-compact-action-buttons>
-                            @if(($order->status ?? 'pending') === 'pending')
-                                <form action="{{ route('admin.booking.accept', $order->id) }}" method="POST" class="inline">
+                            @if (($order->status ?? 'pending') === 'pending')
+                                <form action="{{ route('admin.booking.accept', $order->id) }}" method="POST"
+                                    class="inline">
                                     @csrf
-                                    <button type="submit" class="compact-btn compact-btn-sm compact-btn-success" title="Terima">
+                                    <button type="submit" class="compact-btn compact-btn-sm compact-btn-success"
+                                        title="Terima">
                                         <i class="fas fa-check"></i>
                                     </button>
                                 </form>
-                                <form action="{{ route('admin.booking.reject', $order->id) }}" method="POST" class="inline">
-                                    @csrf
-                                    <button type="submit" class="compact-btn compact-btn-sm compact-btn-danger" title="Tolak">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </form>
+                                <a href="{{ route('admin.booking.reject.form', $order->id) }}"
+                                    class="compact-btn compact-btn-sm compact-btn-danger" title="Tolak">
+                                    <i class="fas fa-times"></i>
+                                </a>
                             @else
                                 <span class="text-xs text-gray-500">{{ ucfirst($order->status ?? 'pending') }}</span>
                             @endif

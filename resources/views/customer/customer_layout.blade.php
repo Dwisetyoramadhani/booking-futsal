@@ -97,9 +97,6 @@
                     <a href="/customer/riwayat" class="nav-link text-primary-700 hover:text-primary-800 px-4 py-2 rounded-lg text-sm font-medium {{ request()->is('riwayat*') ? 'active' : '' }}">
                         <i class="fas fa-history mr-2"></i>Riwayat
                     </a>
-                    <a href="/customer/profil" class="nav-link text-primary-700 hover:text-primary-800 px-4 py-2 rounded-lg text-sm font-medium {{ request()->is('profil*') ? 'active' : '' }}">
-                        <i class="fas fa-user mr-2"></i>Profil
-                    </a>
                     <div class="ml-4 flex items-center space-x-3">
                         <div class="flex items-center space-x-2 text-primary-700">
                             <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">

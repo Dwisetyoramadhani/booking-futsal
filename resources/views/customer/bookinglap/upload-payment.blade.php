@@ -6,7 +6,7 @@
 
 <div class="max-w-4xl mx-auto py-8 px-4">
 
-    <a href="{{ url()->previous() }}"
+    <a href="/customer/riwayat"
        class="inline-flex items-center px-4 py-2 border border-primary-500 text-primary-600 rounded-lg hover:bg-primary-500 hover:text-white transition mb-6">
         <i class="fas fa-arrow-left mr-2"></i>
         Kembali
@@ -60,6 +60,7 @@
                         <p><strong>Nama:</strong> {{ $pesanan->nama_lengkap }}</p>
                         <p><strong>Jumlah Jam:</strong> {{ $pesanan->jumlah_jam }} Jam</p>
                         <p><strong>Total Bayar:</strong> Rp {{ number_format($pesanan->total_biaya,0,',','.') }}</p>
+                        <p><strong>Transfer ke: BCA - 019301</p>
                     </div>
 
                     @if($pesanan->bukti_pembayaran)

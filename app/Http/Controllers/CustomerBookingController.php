@@ -32,9 +32,21 @@ class CustomerBookingController extends Controller
             ->pluck('jam');
 
         $jamOperasional = [
-            '08:00', '09:00', '10:00', '11:00', '12:00',
-            '13:00', '14:00', '15:00', '16:00', '17:00',
-            '18:00', '19:00', '20:00', '21:00', '22:00',
+            '08:00',
+            '09:00',
+            '10:00',
+            '11:00',
+            '12:00',
+            '13:00',
+            '14:00',
+            '15:00',
+            '16:00',
+            '17:00',
+            '18:00',
+            '19:00',
+            '20:00',
+            '21:00',
+            '22:00',
         ];
 
         $jamTersedia = array_diff($jamOperasional, $pesananPadaTanggal->flatMap(function ($jam) {
@@ -64,9 +76,21 @@ class CustomerBookingController extends Controller
 
         // Validasi jam operasional
         $jamOperasional = [
-            '08:00', '09:00', '10:00', '11:00', '12:00',
-            '13:00', '14:00', '15:00', '16:00', '17:00',
-            '18:00', '19:00', '20:00', '21:00', '22:00',
+            '08:00',
+            '09:00',
+            '10:00',
+            '11:00',
+            '12:00',
+            '13:00',
+            '14:00',
+            '15:00',
+            '16:00',
+            '17:00',
+            '18:00',
+            '19:00',
+            '20:00',
+            '21:00',
+            '22:00',
         ];
 
         $jamDipilih = $request->jam;
@@ -96,7 +120,7 @@ class CustomerBookingController extends Controller
         sort($jamDipilih);
         for ($i = 1; $i < count($jamDipilih); $i++) {
             $currentHour = (int) substr($jamDipilih[$i], 0, 2);
-            $prevHour = (int) substr($jamDipilih[$i-1], 0, 2);
+            $prevHour = (int) substr($jamDipilih[$i - 1], 0, 2);
 
             if ($currentHour - $prevHour > 1) {
                 return back()->withInput()->withErrors(['jam' => 'Jam booking harus berurutan.']);
@@ -134,7 +158,6 @@ class CustomerBookingController extends Controller
 
             return redirect()->route('customer.detailbooking', $pesanan->id)
                 ->with('success', 'Pesanan berhasil dibuat! Silakan lakukan pembayaran dan upload bukti pembayaran.');
-
         } catch (\Exception $e) {
             \Log::error('Booking creation failed', [
                 'error' => $e->getMessage(),
@@ -209,7 +232,6 @@ class CustomerBookingController extends Controller
             ]);
 
             return back()->with('success', 'Bukti pembayaran berhasil diupload. Pesanan Anda akan segera diproses.');
-
         } catch (\Exception $e) {
             \Log::error('Payment proof upload failed', [
                 'error' => $e->getMessage(),
@@ -233,12 +255,13 @@ class CustomerBookingController extends Controller
     }
 
     public function paymentPage($id)
-{
-    $pesanan = Pesanan::with('lapangan')
-        ->where('id', $id)
-        ->where('id_pengguna', Auth::id())
-        ->firstOrFail();
+    {
+        $pesanan = Pesanan::with('lapangan')
+            ->where('id', $id)
+            ->where('id_pengguna', Auth::id())
+            ->firstOrFail();
 
-    return view('customer.bookinglap.upload-payment', compact('pesanan'));
-}
+        return view('customer.bookinglap.upload-payment', compact('pesanan'));
+    }
+
 }

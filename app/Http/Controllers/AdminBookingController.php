@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\Pesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +55,8 @@ class AdminBookingController extends Controller
 
         try {
             $pesanan->update([
-                'status' => Pesanan::STATUS_ACCEPTED
+                'status' => Pesanan::STATUS_ACCEPTED,
+                'kode_booking' => 'AF-' . strtoupper(Str::random(8))
             ]);
 
             \Log::info('Booking accepted by admin', [
@@ -64,7 +66,6 @@ class AdminBookingController extends Controller
             ]);
 
             return redirect()->route('admin.booking.index')->with('success', 'Pesanan berhasil diterima.');
-
         } catch (\Exception $e) {
             \Log::error('Failed to accept booking', [
                 'error' => $e->getMessage(),
@@ -108,7 +109,6 @@ class AdminBookingController extends Controller
             ]);
 
             return redirect()->route('admin.booking.index')->with('success', 'Pesanan berhasil ditolak.');
-
         } catch (\Exception $e) {
             \Log::error('Failed to reject booking', [
                 'error' => $e->getMessage(),
@@ -118,6 +118,13 @@ class AdminBookingController extends Controller
 
             return back()->withErrors(['error' => 'Gagal menolak pesanan. Silakan coba lagi.']);
         }
+    }
+
+    public function showRejectForm($id)
+    {
+        $pesanan = Pesanan::findOrFail($id);
+
+        return view('admin.booking.reject', compact('pesanan'));
     }
 
     // Menampilkan detail pesanan

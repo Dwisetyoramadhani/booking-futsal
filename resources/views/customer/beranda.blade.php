@@ -19,7 +19,7 @@
                     <i class="fas fa-calendar-plus mr-2"></i>
                     Booking Sekarang
                 </a>
-                <a href="/riwayat" class="inline-flex items-center px-6 py-3 bg-white text-primary-600 font-semibold rounded-lg border-2 border-primary-200 hover:border-primary-300 hover:bg-primary-50 transition-colors duration-200">
+                <a href="/customer/riwayat" class="inline-flex items-center px-6 py-3 bg-white text-primary-600 font-semibold rounded-lg border-2 border-primary-200 hover:border-primary-300 hover:bg-primary-50 transition-colors duration-200">
                     <i class="fas fa-history mr-2"></i>
                     Lihat Riwayat
                 </a>

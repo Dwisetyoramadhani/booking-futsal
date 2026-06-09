@@ -26,6 +26,7 @@ class Pesanan extends Model
         'bukti_pembayaran',
         'status',
         'catatan',
+        'kode_booking',
         'alasan_penolakan'
     ];
 

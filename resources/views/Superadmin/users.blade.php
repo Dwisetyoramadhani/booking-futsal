@@ -10,17 +10,11 @@
     <div class="p-4 border-b border-gray-200">
         <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <h3 class="text-lg font-semibold text-gray-800">All Users</h3>
-            <button class="w-full md:w-auto bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
-                <i class="fas fa-plus mr-2"></i>Add New User
-            </button>
         </div>
     </div>
 
     <!-- Compact Table -->
-    <x-compact-table
-        :headers="['#', 'User', 'Username', 'Email', 'Role', 'Joined', 'Actions']"
-        searchable="true"
-        searchPlaceholder="Cari user...">
+    <x-compact-table>
 
         @foreach($users as $index => $user)
             <x-compact-table-row>

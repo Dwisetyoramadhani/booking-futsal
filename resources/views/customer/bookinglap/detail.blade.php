@@ -37,6 +37,18 @@
                         Rp{{ number_format($pesanan->total_biaya, 0, ',', '.') }},00</p>
                     <p class="text-yellow-500 font-bold">Status Transaksi: {{ $pesanan->status }}</p>
 
+                    @if ($pesanan->status === 'accepted')
+                        <div class="mt-4 p-4 bg-green-50 border border-green-300 rounded-lg">
+                            <p class="text-sm text-green-700 mb-1">
+                                Tunjukkan kode berikut kepada petugas saat datang:
+                            </p>
+
+                            <div class="text-3xl font-bold tracking-widest text-green-600">
+                                {{ $pesanan->kode_booking }}
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="flex gap-3 mt-4">
 
                         @if ($pesanan->status == 'pending')

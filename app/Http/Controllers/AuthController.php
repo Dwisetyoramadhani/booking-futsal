@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Pengguna;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -16,24 +17,24 @@ class AuthController extends Controller
     }
 
     public function autentic(Request $request)
-    { 
+    {
         // Validasi input login
         $credentials = $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
-    
+
         // Log kredensial yang diterima
         \Log::info('Login attempt: ', $credentials);
-    
+
         // Periksa kredensial pengguna
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-    
+
             // Ambil pengguna yang sedang login
             $user = Auth::user();
             \Log::info('User logged in: ', ['username' => $user->username, 'role' => $user->role]);
-    
+
             // Cek role dan arahkan ke halaman yang sesuai
             switch($user->role) {
                 case 'superadmin':
@@ -47,7 +48,7 @@ class AuthController extends Controller
                     return back()->withErrors(['loginError' => 'Role tidak valid.']);
             }
         }
-    
+
         // Jika kredensial salah
         return back()->withErrors(['loginError' => 'Username atau password salah.']);
     }
@@ -62,19 +63,19 @@ class AuthController extends Controller
 
         return redirect('/'); // Mengarahkan ke landing page
     }
-    
+
     public function register()
     {
         return view('register'); // Menampilkan halaman register
     }
-    
+
     public function store(Request $request)
     {
         // Validasi input registrasi dengan pesan error kustom
         $validated = $request->validate([
             'nama' => 'required|string|max:100|min:2',
-            'username' => 'required|string|max:100|min:3|unique:pengguna|alpha_dash',
-            'email' => 'required|string|email|max:100|unique:pengguna',
+            'username' => 'required|string|max:100|min:3|unique:users|alpha_dash',
+            'email' => 'required|string|email|max:100|unique:users',
             'no_hp' => 'required|string|min:10|max:15|regex:/^[0-9+\-\s]+$/',
             'tanggal_lahir' => 'required|date|before:today|after:1900-01-01',
             'password' => 'required|string|min:8|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
@@ -102,7 +103,7 @@ class AuthController extends Controller
 
         try {
             // Buat pengguna baru
-            $pengguna = Pengguna::create([
+            $pengguna = User::create([
                 'nama' => $validated['nama'],
                 'username' => strtolower($validated['username']),
                 'email' => strtolower($validated['email']),

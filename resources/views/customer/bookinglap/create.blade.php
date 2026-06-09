@@ -16,12 +16,12 @@
     <form method="POST" action="{{ route('customer.booking.store') }}" class="bg-white shadow-md rounded p-6">
         @csrf
         <input type="hidden" name="id_lapangan" value="{{ $lapangan->id }}">
-        
+
         <div class="mb-4">
             <label class="block text-gray-700 mb-2">Nama Lapangan:</label>
             <input type="text" value="{{ $lapangan->nama_lapangan }}" readonly class="border rounded w-full p-2 bg-gray-100">
         </div>
-        
+
         <div class="mb-4">
             <label class="block text-gray-700 mb-2">Harga/Jam:</label>
             <input type="text" value="Rp{{ number_format($lapangan->harga_per_jam, 0, ',', '.') }}" readonly class="border rounded w-full p-2 bg-gray-100">
@@ -45,14 +45,14 @@
         <div class="mb-4">
             <label class="block text-gray-700 mb-2">Tanggal:</label>
             <input type="date" name="tanggal" value="{{ $tanggalDipilih }}" class="border rounded w-full p-2" onchange="location.href='?tanggal=' + this.value">
-        </div>        
+        </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 mb-2">Jam:</label>
             <input type="hidden" id="jam" name="jam[]" value="" /> <!-- Input tersembunyi untuk jam -->
             <input type="text" id="selected-jam" readonly class="border rounded w-full p-2 bg-gray-100 mb-3" placeholder="Jam yang dipilih" />
             <div class="grid grid-cols-4 gap-2 mb-3">
-                @foreach ($jamTersedia as $jam) 
+                @foreach ($jamTersedia as $jam)
                     <label class="cursor-pointer">
                         <span class="px-4 py-2 border rounded block text-center hover:bg-green-200 {{ is_array(old('jam', [])) && in_array($jam, old('jam', [])) ? 'bg-green-300' : 'bg-white' }}" onclick="toggleJam(this, '{{ $jam }}')">
                             {{ $jam }}
@@ -60,7 +60,7 @@
                     </label>
                 @endforeach
             </div>
-        </div>        
+        </div>
 
         <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Booking Lapangan</button>
     </form>

@@ -142,20 +142,7 @@
                         <span>Pesanan</span>
                     </a>
 
-                    <a href="/admin/laporan"
-                       class="sidebar-item flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-700 {{ request()->is('admin/laporan*') ? 'active' : '' }}">
-                        <i class="fas fa-chart-line w-5"></i>
-                        <span>Laporan</span>
-                    </a>
-                </div>
 
-                <div class="space-y-1 mt-8">
-                    <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-3">AUTH</p>
-                    <a href="/profil"
-                       class="sidebar-item flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-700">
-                        <i class="fas fa-user w-5"></i>
-                        <span>Profil</span>
-                    </a>
                 </div>
             </nav>
 

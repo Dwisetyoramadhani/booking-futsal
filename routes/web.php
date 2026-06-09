@@ -46,7 +46,11 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->prefix('admin')->group
     Route::get('booking', [AdminBookingController::class, 'index'])->name('admin.booking.index');
     Route::get('booking/{id}', [AdminBookingController::class, 'show'])->name('admin.booking.show');
     Route::post('booking/{id}/accept', [AdminBookingController::class, 'accept'])->name('admin.booking.accept');
-    Route::post('booking/{id}/reject', [AdminBookingController::class, 'reject'])->name('admin.booking.reject');
+    Route::get('/admin/booking/{id}/reject', [AdminBookingController::class, 'showRejectForm'])
+        ->name('admin.booking.reject.form');
+
+    Route::post('/admin/booking/{id}/reject', [AdminBookingController::class, 'reject'])
+        ->name('admin.booking.reject');
     Route::get('booking/detail', [AdminBookingController::class, 'detail'])->name('admin.booking.detail');
 
     // Dashboard

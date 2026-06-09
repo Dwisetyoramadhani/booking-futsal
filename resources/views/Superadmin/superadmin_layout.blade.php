@@ -61,27 +61,6 @@
                         <i class="fas fa-users text-lg group-hover:scale-110 transition-transform"></i>
                         <span class="font-medium">Kelola Pengguna</span>
                     </a>
-
-                    <a href="#"
-                       class="flex items-center space-x-3 p-3 rounded-xl hover:bg-primary-700 transition-all duration-200 group">
-                        <i class="fas fa-chart-bar text-lg group-hover:scale-110 transition-transform"></i>
-                        <span class="font-medium">Laporan</span>
-                    </a>
-
-                    <a href="#"
-                       class="flex items-center space-x-3 p-3 rounded-xl hover:bg-primary-700 transition-all duration-200 group">
-                        <i class="fas fa-cog text-lg group-hover:scale-110 transition-transform"></i>
-                        <span class="font-medium">Pengaturan</span>
-                    </a>
-
-                    <div class="pt-4 border-t border-primary-700 mt-6">
-                        <a href="#"
-                           class="flex items-center space-x-3 p-3 rounded-xl hover:bg-primary-700 transition-all duration-200 group">
-                            <i class="fas fa-bell text-lg group-hover:scale-110 transition-transform"></i>
-                            <span class="font-medium">Notifikasi</span>
-                            <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">2</span>
-                        </a>
-                    </div>
                 </div>
             </nav>
 
